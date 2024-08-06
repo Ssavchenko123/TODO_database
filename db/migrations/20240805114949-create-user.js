@@ -14,14 +14,17 @@ module.exports = {
       },
       isChecked: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: sequelize.DATE.NOW,
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: sequelize.DATE.NOW,
       },
     });
   },
