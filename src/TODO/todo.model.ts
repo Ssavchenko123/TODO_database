@@ -6,4 +6,16 @@ export class Task extends Model<Task> {
     allowNull: false,
   })
   taskText: string;
+  @Column({
+    allowNull: false,
+  })
+  isChecked: boolean;
+  @Column({
+    allowNull: false,
+  })
+  createdAt: Date;
+  @Column({
+    allowNull: false,
+  })
+  updatedAt: Date;
 }

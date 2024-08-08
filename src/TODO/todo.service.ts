@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { tasks } from 'src/Moks/Task';
+import { InjectModel } from '@nestjs/sequelize';
+import { Task } from './todo.model';
 @Injectable()
 export class TodoService {
+  constructor(@InjectModel(Task) private readonly taskModel: typeof Task) {}
   getTasks() {
-    return tasks;
+    return this.taskModel.findAll();
   }
 }
