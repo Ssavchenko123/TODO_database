@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Task } from './todo.model';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ReplaceTaskDto } from './dto/replace-task.dto';
+import { ReplaceCheckboxDto } from './dto/replace-checkbox.dto';
 
 @Injectable()
 export class TodoService {
@@ -29,11 +30,21 @@ export class TodoService {
   async replaceTask(id: number, updateTaskDto: ReplaceTaskDto): Promise<Task> {
     const [edit, [editedTask]] = await this.taskModel.update(
       { taskText: updateTaskDto.taskText, isChecked: updateTaskDto.isChecked },
-      { where: { id } },
+      { where: { id }, returning: true },
     );
     if (edit === 0) {
-      throw new NotFoundException('not succass');
+      throw new NotFoundException('no tasks?');
     }
     return editedTask;
+  }
+
+  async replaceTaskCheckbox(
+    updateCheckboxDto: ReplaceCheckboxDto,
+  ): Promise<string> {
+    await this.taskModel.update(
+      { isChecked: updateCheckboxDto.isChecked },
+      { where: { isChecked: !updateCheckboxDto.isChecked } },
+    );
+    return 'Update Checkbox';
   }
 }

@@ -11,6 +11,7 @@ import {
 import { TodoService } from './todo.service';
 import { Task } from './todo.model';
 import { ReplaceTaskDto } from './dto/replace-task.dto';
+import { ReplaceCheckboxDto } from './dto/replace-checkbox.dto';
 
 @Controller('todo')
 export class TodoController {
@@ -40,8 +41,11 @@ export class TodoController {
   ): Promise<Task> {
     return this.todoService.replaceTask(id, updateTaskDto);
   }
-  // @Delete()
-  // remove(@Param('id') id: number) {
-  //   return this.todoService.getTasks(id);
-  // }
+
+  @Patch()
+  replaceCheckbox(
+    @Body() updateCheckboxDto: ReplaceCheckboxDto,
+  ): Promise<string> {
+    return this.todoService.replaceTaskCheckbox(updateCheckboxDto);
+  }
 }
