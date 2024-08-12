@@ -11,16 +11,18 @@ import { Task } from './TODO/todo.model';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        host: configService.get('DB_HOST'),
-        name: configService.get('DB_NAME'),
         dialect: configService.get('DB_DIALECT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
+        host: configService.get('DB_HOST'),
         port: Number(configService.get('DB_PORT')),
+        username: configService.get('DB_USER'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_NAME'),
         models: [Task],
       }),
     }),
     TodoModule,
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

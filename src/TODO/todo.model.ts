@@ -8,6 +8,7 @@ export class Task extends Model<Task> {
   taskText: string;
   @Column({
     allowNull: false,
+    defaultValue: false,
   })
   isChecked: boolean;
   @Column({
@@ -18,4 +19,5 @@ export class Task extends Model<Task> {
     allowNull: false,
   })
   updatedAt: Date;
+  static task: any;
 }
