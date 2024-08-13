@@ -7,7 +7,7 @@ import { ReplaceCheckboxDto } from './dto/replace-checkbox.dto';
 
 @Injectable()
 export class TodoService {
-  [x: string]: any;
+  constructor(@InjectModel(Task) private readonly taskModel: typeof Task) {}
   deleteCompletedTasks() {
     return this.taskModel.destroy({
       where: { isChecked: true },
@@ -18,7 +18,7 @@ export class TodoService {
       where: { id },
     });
   }
-  constructor(@InjectModel(Task) private readonly taskModel: typeof Task) {}
+
   getTasks() {
     return this.taskModel.findAll();
   }

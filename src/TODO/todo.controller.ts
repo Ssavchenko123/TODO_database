@@ -12,6 +12,7 @@ import { TodoService } from './todo.service';
 import { Task } from './todo.model';
 import { ReplaceTaskDto } from './dto/replace-task.dto';
 import { ReplaceCheckboxDto } from './dto/replace-checkbox.dto';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('todo')
 export class TodoController {
@@ -31,7 +32,7 @@ export class TodoController {
   }
 
   @Post()
-  createTask(@Body() createTaskDto): Promise<Task> {
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.todoService.createNewTask(createTaskDto);
   }
   @Patch(':id')

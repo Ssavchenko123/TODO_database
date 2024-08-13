@@ -1,9 +1,10 @@
-import { IsBoolean, IsString, MaxLength } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class ReplaceTaskDto {
   @IsString()
-  @MaxLength(255)
+  @IsNotEmpty()
+  @Transform(({ value }) => value.trim().substring(0, 255))
   taskText: string;
-  @IsBoolean()
-  isChecked: boolean;
+  isChecked?: boolean;
 }

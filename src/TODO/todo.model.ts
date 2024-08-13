@@ -19,5 +19,4 @@ export class Task extends Model<Task> {
     allowNull: false,
   })
   updatedAt: Date;
-  static task: any;
 }
