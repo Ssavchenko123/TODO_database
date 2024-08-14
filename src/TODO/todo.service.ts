@@ -1,29 +1,33 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Task } from './todo.model';
+
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ReplaceTaskDto } from './dto/replace-task.dto';
 import { ReplaceCheckboxDto } from './dto/replace-checkbox.dto';
 
+import { Task } from './todo.model';
+
 @Injectable()
 export class TodoService {
   constructor(@InjectModel(Task) private readonly taskModel: typeof Task) {}
-  deleteCompletedTasks() {
-    return this.taskModel.destroy({
+  async deleteCompletedTasks(): Promise<string> {
+    await this.taskModel.destroy({
       where: { isChecked: true },
     });
+    return 'completed tasks deleted ';
   }
-  deleteTask(id: number) {
-    return this.taskModel.destroy({
+  async deleteTask(id: number): Promise<string> {
+    await this.taskModel.destroy({
       where: { id },
     });
+    return 'Task deleted';
   }
 
-  getTasks() {
+  getTasks(): Promise<Task[]> {
     return this.taskModel.findAll();
   }
 
-  createNewTask(createTaskDto: CreateTaskDto) {
+  createNewTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskModel.create(createTaskDto);
   }
 
