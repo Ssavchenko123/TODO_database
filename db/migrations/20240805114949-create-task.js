@@ -10,6 +10,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       taskText: {
+        validate: {
+          len: [0, 255],
+        },
         type: Sequelize.STRING,
       },
       isChecked: {
