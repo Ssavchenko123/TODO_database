@@ -8,7 +8,7 @@ export class Task extends Model<Task> {
   taskText: string;
   @Column({
     allowNull: false,
-    defaultValue: false,
+    defaultValue: false, 
   })
   isChecked: boolean;
   @Column({
