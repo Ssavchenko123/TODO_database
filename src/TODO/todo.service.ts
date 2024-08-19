@@ -24,7 +24,10 @@ export class TodoService {
   }
 
   getTasks(): Promise<Task[]> {
-    return this.taskModel.findAll();
+    return this.taskModel.findAll({
+      attributes: ['id', 'taskText', 'isChecked'],
+      order: [['id', 'ASC']],
+    });
   }
 
   createNewTask(createTaskDto: CreateTaskDto): Promise<Task> {

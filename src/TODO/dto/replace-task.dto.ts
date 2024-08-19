@@ -5,7 +5,13 @@ export class ReplaceTaskDto {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => value.trim())
+  @Transform(({ value }) =>
+    value
+      .trim()
+      .replace(/\s+/g, '')
+      .replaceAll(/</g, '&lt;')
+      .replaceAll(/>/g, '&gt;'),
+  )
   taskText: string;
 
   @IsOptional()
